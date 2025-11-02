@@ -34,17 +34,18 @@ def registrar_asistencia(codigo, fecha):
 def obtener_asistencias():
     return cargar_datos(RUTA_ASISTENCIAS)
 
-def validar_usuario(usuario, password, rol="administrador"):
-    usuarios = cargar_datos(RUTA_USUARIOS)
-    if not isinstance(usuarios, list):
-        return False
+def validar_usuario(usuario, password, rol=None):
+    import os, json
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(base_dir, "data", "usuarios.json")
+
+    with open(file_path, "r", encoding="utf-8") as f:
+        usuarios = json.load(f)
 
     for u in usuarios:
-        if (
-            u.get("usuario") == usuario and
-            u.get("password") == password and
-            u.get("rol") == rol
-        ):
-            return True
-    return False
+        if u["usuario"] == usuario and u["password"] == password:
+            if rol and u["rol"] != rol:
+                return None
+            return u 
 
+    return None

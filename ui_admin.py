@@ -1,47 +1,76 @@
+# ui_admin.py
 import tkinter as tk
-from tkinter import scrolledtext, messagebox
-from gestor_json import agregar_alumno, obtener_alumnos, obtener_asistencias, registrar_asistencia
-from ticketera import imprimir_ticket
-from datetime import datetime
+from tkinter import scrolledtext
+from admin_habilitar import HabilitarAsistencia
+from admin_registro import RegistroAlumno
+from admin_lista import ListaAlumnos
+from admin_historial import HistorialAsistencias
 
 class AdminApp(tk.Tk):
-    def __init__(self):
+    def __init__(self, admin_name="Administrador"):
         super().__init__()
-        self.title("Administrador - Sistema de Asistencia")
+        self.title("Panel de Administración - Sistema de Asistencia")
         self.geometry("700x500")
         self.configure(bg="#F2F2F2")
+        self.admin_name = admin_name
 
-        tk.Label(self, text="Agregar nuevo alumno:", bg="#F2F2F2", font=("Arial", 12, "bold")).pack(pady=10)
-        self.entry_nombre = tk.Entry(self, width=40)
-        self.entry_nombre.pack(pady=5)
-        tk.Button(self, text="Agregar y generar ticket", command=self.agregar_alumno_func).pack(pady=5)
-        tk.Button(self, text="Ver lista de alumnos", command=self.ver_alumnos).pack(pady=5)
-        tk.Button(self, text="Ver asistencias", command=self.ver_asistencias).pack(pady=5)
+        tk.Label(
+            self,
+            text=f"Bienvenido, {self.admin_name}",
+            bg="#F2F2F2",
+            font=("Arial", 18, "bold"),
+            fg="#333"
+        ).pack(pady=(20, 5))
 
-        self.text_log = scrolledtext.ScrolledText(self, width=80, height=20)
-        self.text_log.pack(pady=10)
+        tk.Label(
+            self,
+            text="OPCIONES: ",
+            bg="#F2F2F2",
+            font=("Arial", 16, "bold")
+        ).pack(pady=(0, 20))
 
-        self.mainloop()
 
-    def agregar_alumno_func(self):
-        nombre = self.entry_nombre.get().strip()
-        if not nombre:
-            messagebox.showwarning("Aviso", "Ingrese un nombre")
-            return
-        codigo = nombre.upper().replace(" ", "") + "123"
-        agregar_alumno(nombre, codigo)
-        imprimir_ticket(nombre, codigo)
-        self.text_log.insert(tk.END, f"Alumno agregado: {nombre} | Código: {codigo}\n")
-        self.entry_nombre.delete(0, tk.END)
+        btn_style = {"font": ("Arial", 12), "width": 50, "height": 2, "relief": "flat"}
 
-    def ver_alumnos(self):
-        alumnos = obtener_alumnos()
-        self.text_log.insert(tk.END, "\nLista de alumnos:\n")
-        for a in alumnos:
-            self.text_log.insert(tk.END, f"{a['nombre']} | {a['codigo']}\n")
+        tk.Button(self, text="Habilitar asistencia",
+                  bg="#919191", command=self.abrir_habilitar, **btn_style).pack(pady=5)
+        
+        tk.Button(self, text="Registrar alumno",
+                  bg="#919191", command=self.abrir_registro, **btn_style).pack(pady=5)
 
-    def ver_asistencias(self):
-        asistencias = obtener_asistencias()
-        self.text_log.insert(tk.END, "\nAsistencias:\n")
-        for a in asistencias:
-            self.text_log.insert(tk.END, f"{a['codigo']} | {a['fecha']}\n")
+        tk.Button(self, text="Ver lista de alumnos",
+                  bg="#919191", command=self.abrir_lista, **btn_style).pack(pady=5)
+
+        tk.Button(self, text="Ver historial de asistencias",
+                  bg="#919191", command=self.abrir_historial, **btn_style).pack(pady=5)
+
+        tk.Button(
+            self,
+            text="Cerrar sesión",
+            bg="#FF0000",
+            fg="white",
+            font=("Arial", 12, "bold"),
+            width=20,
+            command=self.cerrar_sesion
+        ).pack(pady=10)
+
+    def abrir_habilitar(self):
+        HabilitarAsistencia(self)
+
+    def abrir_registro(self):
+        log_widget = getattr(self, "text_log", None)  
+        RegistroAlumno(self, log_widget=log_widget)
+
+    def abrir_lista(self):
+        log_widget = getattr(self, "text_log", None)
+        ListaAlumnos(self, log_widget=log_widget)
+
+    def abrir_historial(self):
+        log_widget = getattr(self, "text_log", None)
+        HistorialAsistencias(self, log_widget=log_widget)
+
+    def cerrar_sesion(self):
+        self.destroy()
+        from ui_login import LoginApp
+        app = LoginApp()
+        app.mainloop()

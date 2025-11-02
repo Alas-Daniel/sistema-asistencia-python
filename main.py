@@ -1,5 +1,8 @@
-from ui_login import LoginApp
+from ui_login import AdminLogin
+import tkinter as tk
 
 if __name__ == "__main__":
-    app = LoginApp()
+    root = tk.Tk()    
+    root.withdraw()   
+    app = AdminLogin(root)
     app.mainloop()

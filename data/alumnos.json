@@ -1,10 +1,17 @@
 [
     {
-        "nombre": "Daniel Alexander Alas Sanchez",
-        "codigo": "DANIELALEXANDERALASSANCHEZ123"
+        "nie": "0182022025",
+        "nombres": "Edward Edenilson",
+        "apellidos": "Martinez"
     },
     {
-        "nombre": "Edward Edenilson Martinez Rodriguez",
-        "codigo": "EDWARDEDENILSONMARTINEZRODRIGUEZ123"
+        "nie": "0232022025",
+        "nombres": "Daniel ALexander",
+        "apellidos": "Alas Sanchez"
+    },
+    {
+        "nie": "48397223",
+        "nombres": "Josue Enrique",
+        "apellidos": "Guzman Bonilla"
     }
 ]
