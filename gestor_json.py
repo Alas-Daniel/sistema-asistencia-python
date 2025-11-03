@@ -18,9 +18,14 @@ def guardar_datos(ruta, datos):
     with open(ruta, "w", encoding="utf-8") as f:
         json.dump(datos, f, indent=4, ensure_ascii=False)
 
-def agregar_alumno(nombre, codigo):
+def agregar_alumno(nie, nombres, apellidos):
     alumnos = cargar_datos(RUTA_ALUMNOS)
-    alumnos.append({"nombre": nombre, "codigo": codigo})
+    alumno = {
+        "nie": nie,
+        "nombres": nombres,
+        "apellidos": apellidos
+    }
+    alumnos.append(alumno)
     guardar_datos(RUTA_ALUMNOS, alumnos)
 
 def obtener_alumnos():
