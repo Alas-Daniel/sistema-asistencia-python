@@ -10,40 +10,47 @@ class RegistroAlumno(tk.Toplevel):
     def __init__(self, master, log_widget=None):
         super().__init__(master)
         self.title("Registrar Alumno")
-        self.geometry("400x300")
+        self.geometry("500x530")
+        self.resizable(False, False)
         self.configure(bg="#D1D1D1")
         self.log_widget = log_widget
+        self.master = master
+        
+        frame = tk.Frame(self, bg="#D1D1D1")
+        frame.place(relx=0.5, rely=0.5, anchor="center")
 
         tk.Label(self, text="REGISTRAR ALUMNO", bg="#D1D1D1",
-                 font=("Arial", 14, "bold")).pack(pady=15)
+                 font=("Arial", 14, "bold")).pack(pady=55)
+        
+        tk.Label(frame, text="NIE:", bg="#D1D1D1", font=("Arial", 12)).pack(anchor="w")
+        self.entry_nie = tk.Entry(frame, width=40, font=("Arial", 12))
+        self.entry_nie.pack(pady=(5, 15))
 
-        tk.Label(self, text="NIE:", bg="#D1D1D1", font=("Arial", 12)).pack()
-        self.entry_nie = tk.Entry(self, width=30)
-        self.entry_nie.pack(pady=5)
+        tk.Label(frame, text="Nombres:", bg="#D1D1D1", font=("Arial", 12)).pack(anchor="w")
+        self.entry_nombres = tk.Entry(frame, width=40, font=("Arial", 12))
+        self.entry_nombres.pack(pady=(5, 15))
 
-        tk.Label(self, text="Nombres:", bg="#D1D1D1", font=("Arial", 12)).pack()
-        self.entry_nombres = tk.Entry(self, width=30)
-        self.entry_nombres.pack(pady=5)
+        tk.Label(frame, text="Apellidos:", bg="#D1D1D1", font=("Arial", 12)).pack(anchor="w")
+        self.entry_apellidos = tk.Entry(frame, width=40, font=("Arial", 12))
+        self.entry_apellidos.pack(pady=(5, 25))
 
-        tk.Label(self, text="Apellidos:", bg="#D1D1D1", font=("Arial", 12)).pack()
-        self.entry_apellidos = tk.Entry(self, width=30)
-        self.entry_apellidos.pack(pady=5)
-
-        btn_frame = tk.Frame(self, bg="#D1D1D1")
-        btn_frame.pack(pady=15)
+        btn_frame = tk.Frame(frame, bg="#D1D1D1")
+        btn_frame.pack(fill="x", pady=10)
 
         tk.Button(btn_frame, text="Agregar", bg="#2DCA35", fg="black",
-            width=10, relief="flat", activebackground="#28A230", activeforeground="white",
-            command=self.agregar_alumno).grid(row=0, column=0, padx=5)
+          font=("Arial", 11, "bold"),
+          relief="flat", activebackground="#28A230", activeforeground="white",
+          command=self.agregar_alumno).pack(side="left", fill="x", expand=True, padx=3)
 
         tk.Button(btn_frame, text="Limpiar", bg="#F0E113", fg="black",
-                width=10, relief="flat", activebackground="#E5D611", activeforeground="white",
-                command=self.limpiar_campos).grid(row=0, column=1, padx=5)
-
+          font=("Arial", 11, "bold"),
+          relief="flat", activebackground="#E5D611", activeforeground="white",
+          command=self.limpiar_campos).pack(side="left", fill="x", expand=True, padx=3)
+        
         tk.Button(btn_frame, text="Regresar", bg="#DB1714", fg="black",
-                width=10, relief="flat", activebackground="#C21210", activeforeground="white",
-                command=self.destroy).grid(row=0, column=2, padx=5)
-
+          font=("Arial", 11, "bold"),
+          relief="flat", activebackground="#C21210", activeforeground="white",
+          command=self.regresar).pack(side="left", fill="x", expand=True, padx=3)
 
     def agregar_alumno(self):
         nie = self.entry_nie.get().strip()
@@ -83,3 +90,8 @@ class RegistroAlumno(tk.Toplevel):
         self.entry_nie.delete(0, tk.END)
         self.entry_nombres.delete(0, tk.END)
         self.entry_apellidos.delete(0, tk.END)
+
+    def regresar(self):
+        self.destroy()
+        if self.master:
+            self.master.deiconify()

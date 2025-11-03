@@ -55,22 +55,26 @@ class AdminApp(tk.Tk):
         ).pack(pady=10)
 
     def abrir_habilitar(self):
+        self.withdraw() 
         HabilitarAsistencia(self)
 
     def abrir_registro(self):
+        self.withdraw() 
         log_widget = getattr(self, "text_log", None)  
         RegistroAlumno(self, log_widget=log_widget)
 
     def abrir_lista(self):
+        self.withdraw() 
         log_widget = getattr(self, "text_log", None)
         ListaAlumnos(self, log_widget=log_widget)
 
     def abrir_historial(self):
+        self.withdraw() 
         log_widget = getattr(self, "text_log", None)
         HistorialAsistencias(self, log_widget=log_widget)
 
     def cerrar_sesion(self):
-        self.destroy()
+        self.withdraw()
         from ui_login import LoginApp
         app = LoginApp()
         app.mainloop()
