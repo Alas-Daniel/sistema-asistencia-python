@@ -1,10 +1,6 @@
-# admin_registro.py
 import tkinter as tk
 from tkinter import messagebox
-import json
-import os
-
-ALUMNOS_FILE = os.path.join("data", "alumnos.json")
+from gestor_json import agregar_alumno
 
 class RegistroAlumno(tk.Toplevel):
     def __init__(self, master, log_widget=None):
@@ -40,7 +36,7 @@ class RegistroAlumno(tk.Toplevel):
         tk.Button(btn_frame, text="Agregar", bg="#2DCA35", fg="black",
           font=("Arial", 11, "bold"),
           relief="flat", activebackground="#28A230", activeforeground="white",
-          command=self.agregar_alumno).pack(side="left", fill="x", expand=True, padx=3)
+          command=self.guardar_alumno).pack(side="left", fill="x", expand=True, padx=3)
 
         tk.Button(btn_frame, text="Limpiar", bg="#F0E113", fg="black",
           font=("Arial", 11, "bold"),
@@ -52,7 +48,7 @@ class RegistroAlumno(tk.Toplevel):
           relief="flat", activebackground="#C21210", activeforeground="white",
           command=self.regresar).pack(side="left", fill="x", expand=True, padx=3)
 
-    def agregar_alumno(self):
+    def guardar_alumno(self):
         nie = self.entry_nie.get().strip()
         nombres = self.entry_nombres.get().strip()
         apellidos = self.entry_apellidos.get().strip()
@@ -61,24 +57,7 @@ class RegistroAlumno(tk.Toplevel):
             messagebox.showwarning("Aviso", "Todos los campos son obligatorios.")
             return
 
-        if os.path.exists(ALUMNOS_FILE):
-            with open(ALUMNOS_FILE, "r", encoding="utf-8") as f:
-                try:
-                    alumnos = json.load(f)
-                except json.JSONDecodeError:
-                    alumnos = []
-        else:
-            alumnos = []
-
-        alumno = {
-            "nie": nie,
-            "nombres": nombres,
-            "apellidos": apellidos
-        }
-        alumnos.append(alumno)
-
-        with open(ALUMNOS_FILE, "w", encoding="utf-8") as f:
-            json.dump(alumnos, f, indent=4, ensure_ascii=False)
+        agregar_alumno(nie, nombres, apellidos)
 
         messagebox.showinfo("Éxito", f"Alumno {nombres} {apellidos} agregado correctamente.")
         if self.log_widget:

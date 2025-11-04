@@ -31,10 +31,32 @@ def agregar_alumno(nie, nombres, apellidos):
 def obtener_alumnos():
     return cargar_datos(RUTA_ALUMNOS)
 
-def registrar_asistencia(codigo, fecha):
+def buscar_alumno_por_nie(nie):
+    alumnos = cargar_datos(RUTA_ALUMNOS)
+    for alumno in alumnos:
+        if alumno["nie"] == nie:
+            return alumno
+    return None
+
+def registrar_asistencia(nie, nombres, apellidos, fecha, hora, estado):
     asistencias = cargar_datos(RUTA_ASISTENCIAS)
-    asistencias.append({"codigo": codigo, "fecha": fecha})
+    asistencia = {
+        "nie": nie,
+        "nombres": nombres,
+        "apellidos": apellidos,
+        "fecha": fecha,
+        "hora": hora,
+        "estado": estado
+    }
+    asistencias.append(asistencia)
     guardar_datos(RUTA_ASISTENCIAS, asistencias)
+
+def ya_registro_hoy(nie, fecha):
+    asistencias = cargar_datos(RUTA_ASISTENCIAS)
+    for asistencia in asistencias:
+        if asistencia["nie"] == nie and asistencia["fecha"] == fecha:
+            return True
+    return False
 
 def obtener_asistencias():
     return cargar_datos(RUTA_ASISTENCIAS)
