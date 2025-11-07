@@ -19,7 +19,7 @@ class AdminApp(tk.Tk):
             text=f"Bienvenido, {self.admin_name}",
             bg="#F2F2F2",
             font=("Arial", 18, "bold"),
-            fg="#333"
+            fg="#000000"
         ).pack(pady=(20, 5))
 
         tk.Label(

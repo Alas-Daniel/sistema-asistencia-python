@@ -40,7 +40,7 @@ class HabilitarAsistencia(tk.Toplevel):
         scrollbar = tk.Scrollbar(frame_tabla)
         scrollbar.pack(side="right", fill="y")
         
-        # Treeview
+        # tabla
         self.tabla = ttk.Treeview(frame_tabla, 
                                    columns=("NIE", "Nombre", "Hora", "Estado"),
                                    show="headings",
@@ -162,6 +162,6 @@ class HabilitarAsistencia(tk.Toplevel):
 # Para probar
 if __name__ == "__main__":
     root = tk.Tk()
-    root.withdraw()
+    root.withdraw() 
     ventana = HabilitarAsistencia(root)
     root.mainloop()

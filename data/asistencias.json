@@ -14,5 +14,53 @@
         "fecha": "03/11/2025",
         "hora": "21:14:50",
         "estado": "Muy tarde"
+    },
+    {
+        "nie": "3670136",
+        "nombres": "Iverson",
+        "apellidos": "Zepeda",
+        "fecha": "05/11/2025",
+        "hora": "13:41:31",
+        "estado": "Muy tarde"
+    },
+    {
+        "nie": "0182022025",
+        "nombres": "Edward Edenilson",
+        "apellidos": "Martinez",
+        "fecha": "06/11/2025",
+        "hora": "11:37:35",
+        "estado": "Muy tarde"
+    },
+    {
+        "nie": "0232022025",
+        "nombres": "Daniel ALexander",
+        "apellidos": "Alas Sanchez",
+        "fecha": "06/11/2025",
+        "hora": "19:51:54",
+        "estado": "Muy tarde"
+    },
+    {
+        "nie": "48397223",
+        "nombres": "Josue Enrique",
+        "apellidos": "Guzman Bonilla",
+        "fecha": "06/11/2025",
+        "hora": "19:52:12",
+        "estado": "Muy tarde"
+    },
+    {
+        "nie": "3670136",
+        "nombres": "Iverson",
+        "apellidos": "Zepeda",
+        "fecha": "06/11/2025",
+        "hora": "20:12:02",
+        "estado": "Muy tarde"
+    },
+    {
+        "nie": "0445022025",
+        "nombres": "Bryan Ernesto",
+        "apellidos": "Garcia Alvarado",
+        "fecha": "06/11/2025",
+        "hora": "20:16:49",
+        "estado": "Muy tarde"
     }
 ]

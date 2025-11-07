@@ -27,7 +27,7 @@ class AdminLogin(tk.Toplevel):
             self.img_user = PhotoImage(file="sources/profile_key.png").subsample(7, 7)
             tk.Label(frame, image=self.img_user, bg="#d9d9d9").pack(pady=(0, 25))
         except:
-            tk.Label(frame, text="PERFIL", bg="#d9d9d9", font=("Arial", 48)).pack(pady=(0, 25))
+            tk.Label(frame, text="PERFIL", bg="#d9d9d9", font=("Arial", 40)).pack(pady=(0, 25))
 
         tk.Label(frame, text="Usuario:", bg="#d9d9d9", font=("Arial", 12)).pack(anchor="w")
         self.entry_usuario = tk.Entry(frame, font=("Arial", 14), width=30)
